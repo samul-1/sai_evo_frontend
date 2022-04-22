@@ -9,7 +9,14 @@
       :class="{ 'order-12 ml-2': labelOnLeft }"
       class="relative inline-block w-10 h-4 mt-1 mr-2 align-middle transition duration-200 ease-in bg-transparent rounded-full shadow-sm select-none "
     >
+      <mcw-switch
+        :id="overrideId || id"
+        :name="(overrideId || id) + '-name'"
+        v-model="proxyModelValue"
+      />
+
       <input
+        v-if="false"
         type="checkbox"
         name="toggle"
         :value="value"
@@ -44,6 +51,7 @@
       >
 
       <label
+        v-if="false"
         :for="overrideId || id"
         class="block overflow-hidden bg-gray-400 rounded-full cursor-pointer  toggle-rail toggle-label"
       ></label>

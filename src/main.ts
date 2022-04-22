@@ -19,6 +19,9 @@ import { BrowserTracing } from "@sentry/tracing";
 import "vue3-tour/dist/vue3-tour.css";
 import { logOut } from "./utils";
 
+import VueMaterialAdapter from "vue-material-adapter";
+//import { checkbox, radio } from "vue-material-adapter";
+
 const gAuthOptions = {
   clientId:
     "956826904172-mcsaj1bqcllv93bpad7dmd0e3oil4758.apps.googleusercontent.com",
@@ -53,6 +56,11 @@ axios.interceptors.response.use(
 const app = createApp(App);
 
 app
+  // material adapter components
+  //.use(checkbox)
+  //.use(radio)
+  // ---
+  .use(VueMaterialAdapter)
   .use(GAuth, gAuthOptions)
   .use(store)
   .use(router)

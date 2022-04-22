@@ -1,15 +1,33 @@
 <template>
   <div class="relative">
-    <label class="absolute top-2 left-1.5 origin-0 fixed-label"><slot></slot></label>
+    <label class="absolute top-2 left-1.5 origin-0 fixed-label"
+      ><slot></slot
+    ></label>
 
     <div class="w-full">
       <label
         :for="id + '-input-' + index"
-        class="flex my-0.5 max-h-screen space-x-1.5 overflow-y-hidden cursor-pointer items-top"
+        class="
+          flex
+          my-0.5
+          max-h-screen
+          space-x-1.5
+          overflow-y-hidden
+          cursor-pointer
+          items-top
+        "
         v-for="(option, index) in options"
         :key="id + '-option-' + index"
       >
+        <mcw-radio
+          :id="id + '-input-' + index"
+          v-model="proxyModelValue"
+          :value="option.value"
+          :name="option.value + '-name'"
+          :disabled="disabled"
+        ></mcw-radio>
         <input
+          v-show="false"
           @input="onInput(option.value, $event)"
           style="min-width: 15px; min-height: 15px"
           class="mt-1.5"
@@ -20,7 +38,11 @@
           :disabled="disabled"
         />
         <div class="flex space-x-2 items-top">
-          <multi-icon v-if="option.icons" class="w-6" :icons="option.icons"></multi-icon>
+          <multi-icon
+            v-if="option.icons"
+            class="w-6"
+            :icons="option.icons"
+          ></multi-icon>
           <div class="flex flex-col">
             <p class="" v-html="option.content"></p>
             <!-- <p
@@ -59,9 +81,19 @@ export default defineComponent({
   methods: {
     onInput(value: string, inputEvent: Event) {
       // eslint-disable-next-line @typescript-eslint/no-extra-semi
-      ((inputEvent.target as unknown) as { checked: boolean }).checked = false;
+      (inputEvent.target as unknown as { checked: boolean }).checked = false;
       inputEvent.preventDefault();
       this.$emit("update:modelValue", value);
+    },
+  },
+  computed: {
+    proxyModelValue: {
+      get() {
+        return this.modelValue;
+      },
+      set(value: any) {
+        this.$emit("update:modelValue", value);
+      },
     },
   },
 });

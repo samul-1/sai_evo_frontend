@@ -1,8 +1,8 @@
 <template>
-  <button
+  <!--<button
     @mousedown="onMouseDown"
     :disabled="disabled || loading"
-    class="relative overflow-hidden  disabled:cursor-not-allowed disabled:opacity-70"
+    class="relative overflow-hidden disabled:cursor-not-allowed disabled:opacity-70"
     :class="{
       'shadow-inner bg-light': forceActive,
       'bg-success-light bg-opacity-30':
@@ -43,15 +43,15 @@
       'icon-btn-base': variant === 'icon' && size === 'base',
       'icon-btn-lg': variant === 'icon' && size === 'lg',
     }"
-  >
-    <!-- FIXME review shadow -->
-    <div class="flex w-full">
+  >-->
+  <div>
+    <div class="flex w-full" v-if="false">
       <p class="flex items-center mx-auto" :class="loading ? 'invisible' : ''">
         <slot></slot>
       </p>
     </div>
     <p
-      v-if="loading"
+      v-if="false && loading"
       class="absolute transform -translate-x-1/2 -translate-y-1/2  top-1/2 left-1/2"
     >
       <spinner
@@ -59,8 +59,22 @@
         :variant="variant === 'primary' ? 'primary' : 'gray'"
       ></spinner>
     </p>
-    <slot name="content"></slot>
-  </button>
+    <!--<slot name="content"></slot>-->
+    <!--</button>-->
+    <mdc-button
+      v-if="variant !== 'icon'"
+      @click="$emit('click')"
+      :raised="!outline"
+      :unelevated="false"
+      :outlined="outline"
+      slot="icon"
+      icon="edit"
+      ><slot></slot
+    ></mdc-button>
+    <mcw-icon-button v-else>
+      <mcw-material-icon icon="share" />
+    </mcw-icon-button>
+  </div>
 </template>
 
 <script lang="ts">

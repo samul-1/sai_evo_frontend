@@ -116,3 +116,7 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+@use "@/styles/_index.scss";
+</style>

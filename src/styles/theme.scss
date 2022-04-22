@@ -1,0 +1,16 @@
+$dark-mode-primary: #485BCA;
+$dark-mode-on-primary: white;
+
+@use '@material/theme'  with (
+  $primary: #485BCA,
+  $on-primary: white,
+);
+
+:root {
+    @media screen and (prefers-color-scheme: dark) {
+        --mdc-theme-primary: #{$dark-mode-primary};
+        --mdc-theme-on-primary: #{$dark-mode-on-primary};
+
+        background: #ffffff;
+    }
+}
